@@ -28,6 +28,15 @@
                                                }
                                        }
                                        catch (e) {}
+									   var tl = new GTileLayer(new GCopyrightCollection("Arizona State University"), 12, 17);
+                                       tl.getTileUrl = function(tile, zoom) {
+											   console.log("get tile url" + tile);
+                                               return 'http://dhivyat.github.com/maptiles/' + zoom + '_' + tile.x + '_' + tile.y + '.jpg';
+                                       }
+									   tl.isPng = function() { return false; }
+									   tl.getOpacity = function() { return 1.0; }
+                                       overlay = new GTileLayerOverlay(tl);
+                                       
 
                                        resizeDiv();
                                        map = new GMap2(mapEl);
@@ -50,26 +59,7 @@
                                        }
 
 
-                                       tilelayers = new Object();
-
-                                       var tl = new GTileLayer(new GCopyrightCollection(), 0, 17);
-                                       tl.getTileUrl = function(tile, zoom) {
-                                               var layer = self.tilelayers[zoom];
-                                           if (layer && tile.x >= layer['xmin'] && tile.x <= layer['xmax'] &&
-                                               tile.y >= layer['ymin'] && tile.y <= layer['ymax']) {
-                                               return 'http://www.asu.edu/map/interactive/tiles/tempe/' + zoom + '/' + tile.x + '_' + tile.y + '_' + zoom + '.gif';
-                                           } else {
-                                               return 'http://www.asu.edu/map/interactive/images/transparent.gif';
-                                           }
-                                       }
-                                       overlay = new GTileLayerOverlay(tl);
                                        map.addOverlay(overlay);
-
-                                       try {
-                                               mapEl.childNodes[1].style.visibility = 'hidden';
-                                               mapEl.childNodes[2].style.visibility = 'hidden';
-                                       }
-                                       catch (e) {}
                                }
                        }
                //]]>
