@@ -27,7 +27,7 @@
                        navigator.geolocation.getCurrentPosition(
                                function(position){
                                    latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
-                                map.addOverlay(new GMarker(latlng); 
+                                map.addOverlay(new GMarker(latlng)); 
 				  map.setCenter(latlng, zoom);
                                }
                            );
