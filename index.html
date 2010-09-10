@@ -8,7 +8,7 @@
                <script type="text/javascript">
                //<![CDATA[
                        var map;
-
+					   var shouldFollowLocation = false;
                        function resizeDiv() {
                                var mapEl = document.getElementById("map");
                                mapEl.style.width = (window.innerWidth - 0) + 'px';
@@ -45,21 +45,34 @@
                                                        (params['latitude'] ? parseFloat(params['latitude']) : 33.416660),
                                                        (params['longitude'] ? parseFloat(params['longitude']) : -111.922983)
                                                );
+									   
+		                               map.addOverlay(overlay);
                                        map.setCenter(latlng, zoom);
                                        if (navigator.geolocation) {
                                                navigator.geolocation.watchPosition(
                                                                function(position) {
-                                                                       latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
-                                                                       map.setCenter(latlng, zoom);
+	                                                               latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
+																	   if (shouldFollowLocation){
+	                                                                       map.setCenter(latlng, zoom);																		
+																	}
                                                                },
                                                                function(error){
                                                                        // handle when we can't get a position
                                                                }
                                                        )
                                        }
-
-
-                                       map.addOverlay(overlay);
+									   function toggleFollow(){
+											if (shouldFollowLocation){
+												shouldFollowLocation = false;
+											}
+											else
+											{
+												shouldFollowLocation = true;
+												alert('toggled location to follow');
+												map.setCenter(latlng, 15);
+											}
+										}
+									   
                                }
                        }
                //]]>
