@@ -9,17 +9,21 @@
                //<![CDATA[
                        var map;
 					   var shouldFollowLocation = false;
-					   var latlng = new GLatLng(
-                                       (params['latitude'] ? parseFloat(params['latitude']) : 33.416660),
-                                       (params['longitude'] ? parseFloat(params['longitude']) : -111.922983)
-                               );
-
                        function resizeDiv() {
                                var mapEl = document.getElementById("map");
                                mapEl.style.width = (window.innerWidth - 0) + 'px';
                                mapEl.style.height = (window.innerHeight - 0) + 'px';
                        }
 
+					   function toggleFollow(){
+							if (shouldFollowLocation){
+								shouldFollowLocation = false;
+							}
+							else
+							{
+								shouldFollowLocation = true;
+							}
+						}
 
                        function load() {
                                var params = {};
@@ -46,14 +50,18 @@
                                        resizeDiv();
                                        map = new GMap2(mapEl);
                                        var zoom = (params['zoom'] ? parseInt(params['zoom']) : 13);
+                                       var latlng = new GLatLng(
+                                                       (params['latitude'] ? parseFloat(params['latitude']) : 33.416660),
+                                                       (params['longitude'] ? parseFloat(params['longitude']) : -111.922983)
+                                               );
 									   
 		                               map.addOverlay(overlay);
                                        map.setCenter(latlng, zoom);
                                        if (navigator.geolocation) {
                                                navigator.geolocation.watchPosition(
                                                                function(position) {
-	                                                               latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
 																	   if (shouldFollowLocation){
+	                                                                       latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
 	                                                                       map.setCenter(latlng, zoom);																		
 																	}
                                                                },
@@ -62,22 +70,8 @@
                                                                }
                                                        )
                                        }
-									   
                                }
                        }
-
-					   function toggleFollow(){
-							if (shouldFollowLocation){
-								shouldFollowLocation = false;
-							}
-							else
-							{
-								shouldFollowLocation = true;
-								alert('toggled location to follow');
-								map.setCenter(latlng, 15);
-							}
-						}
-					   
                //]]>
                </script>
  </head>
