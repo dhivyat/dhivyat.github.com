@@ -15,16 +15,6 @@
                                mapEl.style.height = (window.innerHeight - 0) + 'px';
                        }
 
-					   function toggleFollow(){
-							if (shouldFollowLocation){
-								shouldFollowLocation = false;
-							}
-							else
-							{
-								shouldFollowLocation = true;
-							}
-						}
-
                        function load() {
                                var params = {};
                                if (GBrowserIsCompatible()) {
@@ -58,10 +48,8 @@
                                        if (navigator.geolocation) {
                                                navigator.geolocation.watchPosition(
                                                                function(position) {
-																	   if (shouldFollowLocation){
 	                                                                       latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
 	                                                                       map.setCenter(latlng, zoom);																		
-																	}
                                                                },
                                                                function(error){
                                                                        // handle when we can't get a position
