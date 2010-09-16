@@ -68,10 +68,10 @@
                        if (navigator.geolocation) {
                            navigator.geolocation.watchPosition(
                                function(position) {
-                                   if (followLocation) {
+                                  // if (followLocation) {
                                        latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
                                        map.setCenter(latlng, zoom);                                       
-                                   };
+                                  // };
                                },
                                function(error){
                                    // handle when we can't get a position
