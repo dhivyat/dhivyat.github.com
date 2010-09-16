@@ -83,7 +83,13 @@
                                }
                            )
                        }
-
+			GEvent.addListener(
+			map,
+			'drag'
+			function(){
+			followLocation = false;
+			}
+			);
 
                        map.addOverlay(overlay);
                    }
