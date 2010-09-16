@@ -28,6 +28,7 @@
                                function(position){
                                    latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
                                    map.setCenter(latlng, zoom);
+                                map.addOverlay(new GMarker(latlng)); 
                                }
                            );
                        return followLocation;
@@ -55,7 +56,6 @@
                        tl.getOpacity = function() { return 1.0; }
                        overlay = new GTileLayerOverlay(tl);
 
-
                        resizeDiv();
                        map = new GMap2(mapEl);
                        var zoom = (params['zoom'] ? parseInt(params['zoom']) : 13);
@@ -77,7 +77,13 @@
                                }
                            )
                        }
-
+                       GEvent.addListener(
+                            map,
+                            'drag',
+                            function(){
+                                followLocation = false;
+                            }
+                           );
 
                        map.addOverlay(overlay);
                    }
@@ -90,3 +96,7 @@
    <div id="map" style="border: 0px solid black"> </div>
  </body>
 </html>
+ 
+       
+                                                                                    
+ 
