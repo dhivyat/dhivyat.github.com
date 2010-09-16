@@ -19,7 +19,7 @@
                function toggleLocation(){
                    // toggle whether watchPosition should move the map or not
                    if(followLocation){
-			if(map.addOverlay(new GMarker(latlng)).focus())
+			if(GMarker(latlng).focus())
 			{
 			followLocation=true;
 			}
