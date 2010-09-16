@@ -18,12 +18,12 @@
 
                function toggleLocation(){
                    // toggle whether watchPosition should move the map or not
-                  // if(followLocation){
-                    //   followLocation = false;
-                      // return followLocation;
-                  // }
-                  // else{
-                    //   followLocation = true;
+                   if(followLocation){
+                       followLocation = false;
+                       return followLocation;
+                   }
+                   else{
+                       followLocation = true;
                        navigator.geolocation.getCurrentPosition(
                                function(position){
                                    latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
@@ -31,8 +31,8 @@
 				  map.setCenter(latlng, zoom);
                                }
                            );
-                      // return followLocation;
-                  // }
+                       return followLocation;
+                   }
                }
 
                function load() {
@@ -68,10 +68,10 @@
                        if (navigator.geolocation) {
                            navigator.geolocation.watchPosition(
                                function(position) {
-                                  // if (followLocation) {
+                                   if (followLocation) {
                                        latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
                                        map.setCenter(latlng, zoom);                                       
-                                  // };
+                                   };
                                },
                                function(error){
                                    // handle when we can't get a position
