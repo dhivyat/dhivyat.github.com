@@ -15,20 +15,25 @@
                    mapEl.style.width = (window.innerWidth - 0) + 'px';
                    mapEl.style.height = (window.innerHeight - 0) + 'px';
                }
-
+               
                function toggleLocation(){
                    // toggle whether watchPosition should move the map or not
                    if(followLocation){
                        followLocation = false;
+                       console.log('set to false');
                        return followLocation;
                    }
                    else{
+                       console.log('set to true');
                        followLocation = true;
                        navigator.geolocation.getCurrentPosition(
                                function(position){
                                    latlng = new GLatLng(position.coords.latitude, position.coords.longitude);
                                    map.setCenter(latlng, zoom);
                                 map.addOverlay(new GMarker(latlng)); 
+                               },
+                               function(positionError){
+                                   console.log(positionError);
                                }
                            );
                        return followLocation;
@@ -93,6 +98,7 @@
  </head>
 
  <body style="margin: 0px;" onload="load()" onunload="GUnload()" onresize="resizeDiv()">
+     <a href="#" onclick="toggleLocation();">toggle now</a>
    <div id="map" style="border: 0px solid black"> </div>
  </body>
 </html>
