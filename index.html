@@ -56,7 +56,6 @@
                        catch (e) {}
                        var tl = new GTileLayer(new GCopyrightCollection("Arizona State University"), 12, 17);
                        tl.getTileUrl = function(tile, zoom) {
-                           console.log("get tile url" + tile);
                            return 'http://dhivyat.github.com/maptiles/' + zoom + '_' + tile.x + '_' + tile.y + '.jpg';
                        }
                        tl.isPng = function() { return false; }
